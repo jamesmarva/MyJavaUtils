@@ -269,5 +269,38 @@ public class FileUtils {
     }
 
 
+    public List<String> getAllFilenameInDirectory(String filePath) {
+        List<String> fileNames = new ArrayList<>();
+        LinkedList<File> tempDirectoryList = new LinkedList<>();
+        File fileDirectory = new File(filePath);
+        if (fileDirectory.exists()) {
+            File[] filesInDirectory = fileDirectory.listFiles();
+            for (File itemFile : filesInDirectory) {
+                if (itemFile.isDirectory()) {
+                    tempDirectoryList.add(itemFile);
+                } else {
+                    fileNames.add(itemFile.getAbsolutePath());
+                }
+            }
+            File itemFile;
+            while (!tempDirectoryList.isEmpty()) {
+                itemFile = tempDirectoryList.removeFirst();
+                filesInDirectory = itemFile.listFiles();
+                for (File file : filesInDirectory) {
+                    if (file.isDirectory()) {
+                        tempDirectoryList.add(file);
+                    } else {
+                        fileNames.add(file.getAbsolutePath());
+                    }
+                }
+            }
+            return fileNames;
+        } else {
+            return fileNames;
+        }
+
+
+    }
+
 
 }
