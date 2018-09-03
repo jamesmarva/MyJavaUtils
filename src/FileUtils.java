@@ -1,6 +1,9 @@
 import java.io.*;
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 描述:
@@ -243,4 +246,28 @@ public class FileUtils {
 
         return oldFile.renameTo(newFile);// 重命名
     }
+
+    /**
+     * 返回某个文件夹下面的文件名的绝对路径。
+     * @param filePath
+     * @return
+     */
+    public List<String> getFilenameInDirectory(String filePath) {
+        List<String> fileNames = new ArrayList<>();
+        File fileDirectory = new File(filePath);
+        if (fileDirectory.exists()) {
+            File[] filesInDirectory = fileDirectory.listFiles();
+            for (File file : filesInDirectory) {
+                if (!file.isDirectory()) {
+                    fileNames.add(file.getAbsolutePath());
+                }
+            }
+            return fileNames;
+        } else {
+            return fileNames;
+        }
+    }
+
+
+
 }
